@@ -1,0 +1,12 @@
+services:
+  solana-middleware:
+    build:
+      context: ".."
+      dockerfile: "docker/Dockerfile"
+    restart: always
+    ports:
+      - "8181:8181"
+    volumes:
+      - ../config:/app/config
+      - ../src:/app/src
+    working_dir: /app

@@ -1,0 +1,13 @@
+[Unit]
+Description=Solana RPC Middleware
+After=network.target
+
+[Service]
+ExecStart=/path/to/solana-middleware --config /path/to/config/config.yaml
+Restart=always
+User=root
+WorkingDirectory=/path/to
+Environment="PATH=/usr/local/bin:/usr/bin:/bin:/home/solana/.local/bin"
+
+[Install]
+WantedBy=multi-user.target

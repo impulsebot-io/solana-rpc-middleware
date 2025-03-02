@@ -1,0 +1,20 @@
+localRpc: "http://127.0.0.1:8899"
+listenAddr: ":8181"
+nodeCheckInterval: 5 # minutes
+healthCheckInterval: 30 # seconds
+maxRetries: 3
+maxSlotsBehind: 30
+
+services:
+  - name: "metrics"
+    path: "8083"
+    targetPort: 9393
+
+auth:
+  enableTokenAuth: true
+  tokens:
+    - "secure-token-123"
+  enableIPWhitelist: true
+  whitelistedIPs:
+    - "192.168.1.1"
+    - "127.0.0.1"
