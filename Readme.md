@@ -237,4 +237,4 @@ curl -X POST http://localhost:8181 -H "Authorization: Bearer secure-token-123" \
 
 Feel free to **fork**, submit **pull requests**, or **open issues** to improve this middleware.
 
-🤝 **Join the Impulse community!** Made with ❤️ by the [impulse team](https://impulsebot.io). Together, we build better solutions.
+🤝 **Join the impulse community!** Made with ❤️ by the [impulse team](https://impulsebot.io). Together, we build better solutions.
