@@ -237,5 +237,4 @@ curl -X POST http://localhost:8181 -H "Authorization: Bearer secure-token-123" \
 
 Feel free to **fork**, submit **pull requests**, or **open issues** to improve this middleware.
 
-🚀 **Enjoy your faster & more secure Solana RPC!**
-
+🤝 **Join the Impulse community!** Made with ❤️ by the [impulse team](https://impulsebot.io). Together, we build better solutions.
