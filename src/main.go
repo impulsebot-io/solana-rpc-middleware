@@ -676,15 +676,19 @@ func handleRPCPost(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(errResponse)
 }
 
+var httpClient = &http.Client{
+	Timeout: 10 * time.Second,
+	Transport: &http.Transport{
+		TLSClientConfig:       &tls.Config{InsecureSkipVerify: false},
+		MaxIdleConns:          100,  // Allow up to 100 idle connections
+		MaxIdleConnsPerHost:   50,   // Limit max idle connections per host
+		IdleConnTimeout:       90 * time.Second,  // Close idle connections after 90s
+		DisableKeepAlives:     false, // Ensure connections are reused
+	},
+}
+
 // Forward an RPC request to a node
 func forwardRPCRequest(nodeURL string, body []byte) (*RPCResponse, error) {
-	client := &http.Client{
-		Timeout: 10 * time.Second,
-		Transport: &http.Transport{
-			TLSClientConfig: &tls.Config{InsecureSkipVerify: false},
-		},
-	}
-
 	req, err := http.NewRequest("POST", nodeURL, strings.NewReader(string(body)))
 	if err != nil {
 		return nil, err
@@ -692,7 +696,8 @@ func forwardRPCRequest(nodeURL string, body []byte) (*RPCResponse, error) {
 
 	req.Header.Set("Content-Type", "application/json")
 
-	resp, err := client.Do(req)
+	// Use persistent `httpClient` instead of creating a new client per request
+	resp, err := httpClient.Do(req)
 	if err != nil {
 		return nil, err
 	}
